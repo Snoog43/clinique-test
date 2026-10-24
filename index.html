@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Clinique test</title>
+<style>
+:root{--bg:#f7f6f2;--fg:#1c1c1a;--mut:#67665f;--card:#fff;--line:#e3e1da;--acc:#1f5f8b;--accbg:#e6f0f7;--ok:#1a6b4a;--okbg:#e3f3ea;--warn:#8a5300;--warnbg:#fbf0dc;--bad:#9b2c2c;--badbg:#f8e5e3}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151514;--fg:#ebeae5;--mut:#9c9b94;--card:#1e1e1c;--line:#34332f;--acc:#7cb8e4;--accbg:#1b2b38;--ok:#7fd3a8;--okbg:#17302a;--warn:#f0b35a;--warnbg:#3a2c14;--bad:#f08a80;--badbg:#3a1e1c}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:15.5px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:980px;margin:0 auto;padding:24px 16px 64px}
+nav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap}
+nav div{max-width:980px;margin:0 auto;padding:10px 16px;display:flex;gap:16px;font-size:14px}
+nav a{color:var(--mut);text-decoration:none}
+nav a:hover{color:var(--acc)}
+h1{font-size:28px;margin:8px 0 4px}
+h2{font-size:21px;margin:0 0 12px}
+h3{font-size:16px;margin:18px 0 8px}
+.sous{color:var(--mut);margin:0 0 24px}
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:18px;scroll-margin-top:56px}
+.cartes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.carte{border:1px solid var(--line);border-radius:12px;padding:14px}
+.carte .rang{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--acc)}
+.carte h3{margin:4px 0 6px}
+.carte p{margin:6px 0;font-size:14px}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mut);font-weight:500;white-space:nowrap}
+.tag{display:inline-block;font-size:12px;font-weight:600;border-radius:999px;padding:1px 8px;margin:1px 2px 1px 0;white-space:nowrap}
+.ok{background:var(--okbg);color:var(--ok)}.plus{background:var(--accbg);color:var(--acc)}.warn{background:var(--warnbg);color:var(--warn)}.bad{background:var(--badbg);color:var(--bad)}
+.note{color:var(--mut);font-size:13.5px}
+.encart{border-left:3px solid var(--warn);background:var(--warnbg);padding:10px 14px;border-radius:0 10px 10px 0;margin:12px 0;font-size:14.5px}
+.groupes{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:12px}
+.groupe{border:1px solid var(--line);border-radius:12px;padding:12px}
+.groupe h3{margin:0 0 6px;display:flex;justify-content:space-between;gap:8px}
+.groupe h3 small{color:var(--mut);font-weight:500}
+.groupe label{display:flex;gap:8px;align-items:flex-start;font-size:14px;padding:3px 0;cursor:pointer}
+.groupe input{margin-top:4px;accent-color:var(--acc)}
+.groupe .d{color:var(--mut);font-size:12.5px}
+.compteur{position:sticky;top:52px;z-index:4;background:var(--accbg);color:var(--acc);border-radius:10px;padding:8px 12px;margin:0 0 12px;font-weight:600;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+button{font:inherit;font-weight:600;border:0;border-radius:8px;padding:7px 14px;background:var(--acc);color:var(--card);cursor:pointer}
+button.sec{background:transparent;color:var(--acc);border:1px solid var(--acc)}
+.jours{display:grid;gap:8px}
+.jour{display:grid;grid-template-columns:92px 1fr;gap:12px;border-bottom:1px solid var(--line);padding:8px 0}
+.jour b{color:var(--acc)}
+ul.check{list-style:none;padding:0;margin:0}
+ul.check li{padding:4px 0}
+textarea{width:100%;min-height:340px;font:13px/1.5 ui-monospace,Consolas,monospace;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px}
+a{color:var(--acc)}
+.contacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.contacts div{border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px}
+.sources{font-size:13px;columns:2 320px}
+.sources li{break-inside:avoid;margin-bottom:4px}
+@media (max-width:560px){.jour{grid-template-columns:1fr;gap:2px}h1{font-size:24px}}
+</style>
+</head>
+<body>
+<nav><div>
+  <a href="#choix">Mon choix</a><a href="#comparatif">Comparatif</a><a href="#marqueurs">Marqueurs</a>
+  <a href="#budget">Budget</a><a href="#programme">Programme</a><a href="#preparation">Préparation</a>
+  <a href="#devis">Devis</a><a href="#certifs">Certifications</a><a href="#sources">Sources</a>
+</div></nav>
+<main>
+<h1>Clinique test</h1>
+<p class="sous">Bilan de santé très complet (150+ marqueurs) à Istanbul, février 2027 : où aller, quoi demander, combien prévoir. Recherches faites en octobre 2026. Les prix ne sont pas des devis : demande-les par écrit.</p>
+
+<section id="choix">
+  <h2>Mon choix</h2>
+  <div class="cartes">
+    <div class="carte">
+      <div class="rang">1er choix · qualité + praticité</div>
+      <h3>Acıbadem (hôpital) + Acıbadem Labmed (labo)</h3>
+      <p><span class="tag ok">JCI</span><span class="tag ok">Labo ISO 15189 depuis 2005</span><span class="tag ok">CAP (génétique)</span></p>
+      <p>Le labo du groupe est le <b>premier labo accrédité ISO 15189 de Turquie</b>, et le service international est le plus rodé (en français, réponse en quelques heures sur WhatsApp). On peut tout faire au même endroit : prise de sang, échographie, dermato, gastro, endoscopie.</p>
+      <p class="note">Repère de prix : forfait « Gold Men's » (48 examens) dès 1 400 $. Pour 150+ marqueurs, demande un forfait sur mesure.</p>
+    </div>
+    <div class="carte">
+      <div class="rang">Meilleur prix pour les analyses</div>
+      <h3>Düzen ou Synevo (labos de référence)</h3>
+      <p><span class="tag ok">ISO 15189</span><span class="tag plus">~1 000 tests</span></p>
+      <p>Pour faire <b>uniquement la grosse prise de sang</b> moins cher qu'à l'hôpital. Düzen envoie les tests rares à la Mayo Clinic ou à Cerba (France). Synevo (groupe Medicover) fait le test SIBO hydrogène + méthane.</p>
+      <p class="note">Combinaison maline : la prise de sang ici, puis les consultations et l'imagerie à l'hôpital.</p>
+    </div>
+    <div class="carte">
+      <div class="rang">Si tu veux le plus réputé</div>
+      <h3>Koç University Hospital</h3>
+      <p><span class="tag ok">N°1 Turquie, Newsweek 2026</span></p>
+      <p>Le meilleur hôpital du pays (213e mondial). Hôpital universitaire avec un programme pour patients internationaux (plan et devis en 24 à 48 h). Moins tourné vers les « check-up touristes », probablement plus cher.</p>
+      <p class="note">Même groupe que l'American Hospital (Nişantaşı), qui vend un forfait « longévité » à 5 500 $.</p>
+    </div>
+  </div>
+</section>
+
+<section id="comparatif">
+  <h2>Comparatif des établissements</h2>
+  <div class="tw"><table>
+    <tr><th>Établissement</th><th>Type</th><th>Qualité</th><th>Prix (repères)</th><th>Pour toi</th></tr>
+    <tr><td><b>Acıbadem</b><br><span class="note">Atakent, Maslak, Altunizade…</span></td><td>Groupe hospitalier + labo Labmed</td><td><span class="tag ok">JCI</span> <span class="tag ok">ISO 15189</span> Atakent dans le top 5-7 du pays</td><td>Gold Men's dès 1 400 $</td><td>Tout-en-un, le plus simple</td></tr>
+    <tr><td><b>Memorial</b><br><span class="note">Şişli, Ataşehir</span></td><td>Groupe hospitalier, centre check-up</td><td><span class="tag ok">JCI</span></td><td>−20 % sur les check-up en oct.-nov. 2026 (fini en février)</td><td>Bonne alternative à Acıbadem</td></tr>
+    <tr><td><b>Koç University Hospital</b><br><span class="note">Topkapı</span></td><td>Hôpital universitaire</td><td><span class="tag ok">N°1 Newsweek 2026</span></td><td>Sur devis</td><td>Réputation maximale</td></tr>
+    <tr><td><b>American Hospital</b><br><span class="note">Nişantaşı</span></td><td>Hôpital privé (groupe Koç)</td><td>Très réputé</td><td>Forfait longévité 5 500 $ (34 tests labo)</td><td>Cher pour ce que c'est</td></tr>
+    <tr><td><b>Anadolu Sağlık Merkezi</b><br><span class="note">Gebze, ~1 h du centre</span></td><td>Hôpital privé affilié Johns Hopkins</td><td><span class="tag ok">N°3 Newsweek 2026</span></td><td>Sur devis</td><td>Excellent mais excentré</td></tr>
+    <tr><td><b>Medipol Mega</b><br><span class="note">Bağcılar</span></td><td>Hôpital universitaire</td><td><span class="tag ok">N°4 Newsweek 2026</span></td><td>Souvent moins cher</td><td>Bon rapport qualité-prix</td></tr>
+    <tr><td><b>Düzen</b></td><td>Labo de référence</td><td><span class="tag ok">ISO 15189</span> ~1 000 tests, envoie à Mayo/Cerba</td><td>Tarif labo (le moins cher)</td><td>La grosse prise de sang</td></tr>
+    <tr><td><b>Synevo</b><br><span class="note">siège Şişli</span></td><td>Labo (groupe Medicover)</td><td><span class="tag ok">ISO 15189</span></td><td>Tarif labo</td><td>Prise de sang + test SIBO</td></tr>
+    <tr><td><b>Acıbadem Labmed</b></td><td>Labo du groupe Acıbadem</td><td><span class="tag ok">ISO 15189 depuis 2005</span> <span class="tag ok">CAP</span></td><td>Tarif labo</td><td>Le labo le plus accrédité</td></tr>
+    <tr><td>Cliniques « longévité »<br><span class="note">ex. Dr. Terziler</span></td><td>Cliniques privées</td><td><span class="tag warn">Marketing</span> 180+ biomarqueurs annoncés</td><td>Dès 2 500 à 3 000 €</td><td>Cher, à éviter sauf vrai bilan médical</td></tr>
+    <tr><td>Petits labos de quartier<br><span class="note">Labistanbul, Galen…</span></td><td>Labos privés</td><td><span class="tag warn">Accréditation non indiquée</span></td><td>Pas de prix publié</td><td>Je ne les prendrais pas</td></tr>
+  </table></div>
+  <p class="note">JCI = accréditation internationale des hôpitaux. ISO 15189 = norme internationale des labos d'analyses médicales (la même qu'en France). CAP = accréditation américaine des labos, la plus exigeante.</p>
+</section>
+
+<section id="marqueurs">
+  <h2>Les marqueurs à demander</h2>
+  <p>Coche ce que tu veux : le compteur et l'e-mail de devis plus bas se mettent à jour tout seuls. Tout est coché par défaut sauf les options.</p>
+  <p><span class="tag ok">base</span> indispensable · <span class="tag plus">utile</span> recommandé pour un bilan complet · <span class="tag warn">option</span> selon le médecin ou le contexte</p>
+  <div class="compteur"><span id="total">0 marqueurs</span><span><button type="button" class="sec" id="tout">Tout cocher</button> <button type="button" class="sec" id="base">Base seulement</button></span></div>
+  <div class="groupes" id="groupes"></div>
+
+  <h3>Ce que je ne paierais pas</h3>
+  <div class="tw"><table>
+    <tr><th>Test</th><th>Pourquoi</th></tr>
+    <tr><td><span class="tag bad">non</span> « Intolérances alimentaires » IgG (100 à 200 aliments)</td><td>Les sociétés d'allergologie (EAACI) les déconseillent : les IgG montrent ce que tu manges souvent, pas ce qui te rend malade. Les IgE ou prick-tests (dans la liste) mesurent les vraies allergies.</td></tr>
+    <tr><td><span class="tag bad">non</span> SNP MTHFR, COMT, DAO, HNMT</td><td>Ça ne change presque jamais le traitement ; les généticiens (ACMG) déconseillent le test MTHFR. L'homocystéine et les folates suffisent.</td></tr>
+    <tr><td><span class="tag bad">non</span> Analyse minérale des cheveux</td><td>Résultats très différents d'un labo à l'autre sur le même échantillon.</td></tr>
+    <tr><td><span class="tag bad">non</span> Culture de Candida dans les selles</td><td>Le Candida est normalement présent dans l'intestin : un résultat positif ne prouve rien.</td></tr>
+    <tr><td><span class="tag warn">bof</span> Génétique AR, EDA2R, IRF4</td><td>Ça ne change pas la prise en charge de la chute de cheveux.</td></tr>
+    <tr><td><span class="tag warn">bof</span> Activité DAO, mycotoxines urinaires</td><td>Intérêt discuté. Les mycotoxines seulement en cas de vraie exposition aux moisissures.</td></tr>
+  </table></div>
+</section>
+
+<section id="budget">
+  <h2>Budget</h2>
+  <p class="encart">Ce sont <b>mes estimations</b> à partir des prix trouvés (guides 2026, listes d'hôpitaux, sites intermédiaires). Aucun établissement ne publie ses prix pour février 2027 : seul un devis écrit fait foi. Taux utilisé : 1 € ≈ 55 livres turques.</p>
+  <div class="tw"><table>
+    <tr><th>Poste</th><th>Tarif local (labo ou hôpital en direct)</th><th>Via un service « patients internationaux »</th></tr>
+    <tr><td>Prise de sang 150+ marqueurs, urines, selles</td><td>≈ 600 à 1 500 €</td><td>≈ 1 500 à 3 000 €</td></tr>
+    <tr><td>Check-up hospitalier complet (examens + échographies + médecin)</td><td>≈ 380 à 820 €</td><td>1 500 à 2 500 $</td></tr>
+    <tr><td>Consultation de spécialiste (gastro, dermato)</td><td>≈ 27 à 90 € chacune</td><td>≈ 100 à 150 € chacune</td></tr>
+    <tr><td>Test respiratoire SIBO</td><td>prix non publié</td><td>prix non publié</td></tr>
+    <tr><td>Gastroscopie (si le gastro la propose)</td><td>sur devis</td><td>sur devis</td></tr>
+    <tr><td>Vol Marseille ⇄ Istanbul-Sabiha, Pegasus direct</td><td colspan="2">≈ 136 € A/R (3→17 février, relevé le 24/10/2026)</td></tr>
+  </table></div>
+  <p><b>Total réaliste pour tout le médical :</b> environ <b>1 000 à 2 500 €</b> en passant en direct, <b>2 500 à 5 000 €</b> via les forfaits internationaux. Hébergement et repas en plus.</p>
+  <p class="note">Pour payer le tarif local : demande « self-pay price, no insurance », un devis détaillé test par test, et compare deux établissements. Évite les intermédiaires (Bookimed, agences) qui prennent une marge. Les hôpitaux acceptent souvent de négocier un forfait sur mesure.</p>
+</section>
+
+<section id="programme">
+  <h2>Programme type sur 14 jours</h2>
+  <p class="note">Calé sur le vol le moins cher trouvé : Marseille → Istanbul-Sabiha le 3 février, retour le 17.</p>
+  <div class="jours">
+    <div class="jour"><b>J1 · 3 fév.</b><span>Arrivée à Sabiha (SAW, rive asiatique). Dîner léger : viande ou poisson avec riz blanc (préparation du test SIBO). À jeun à partir de 20 h.</span></div>
+    <div class="jour"><b>J2</b><span><b>7 h 30, à jeun :</b> la grosse prise de sang (hormones le matin), urines du matin, remise du kit selles. Puis le <b>test SIBO</b> (environ 3 h sur place, toujours à jeun).</span></div>
+    <div class="jour"><b>J3</b><span>Check-up à l'hôpital : échographie abdominale et thyroïdienne, ECG. Rendu des échantillons de selles.</span></div>
+    <div class="jour"><b>J4</b><span><b>Dermatologue</b> : prélèvements mycologiques (mains, cuir chevelu) et trichoscopie.</span></div>
+    <div class="jour"><b>J5</b><span><b>Gastro-entérologue</b> : premiers résultats sanguins ; il décide d'une gastroscopie ou non.</span></div>
+    <div class="jour"><b>J6 à J9</b><span>Les résultats arrivent (la plupart en 1 à 5 jours). Allergologue si les IgE ou la tryptase sont anormales. Gastroscopie éventuelle.</span></div>
+    <div class="jour"><b>J10 à J12</b><span><b>Consultation de synthèse</b> avec les résultats : diagnostic, traitement, ordonnances traduites en anglais.</span></div>
+    <div class="jour"><b>J13 à J14</b><span>Marge pour un contrôle ou un examen en plus. Récupère tous les comptes rendus en <b>PDF en anglais</b>.</span></div>
+    <div class="jour"><b>J15 · 17 fév.</b><span>Retour. Le test SIBO (environ 20 jours) et les tests envoyés à l'étranger arrivent par e-mail après.</span></div>
+  </div>
+</section>
+
+<section id="preparation">
+  <h2>Préparation</h2>
+  <p class="encart">À valider avec un médecin : arrêter des compléments ou des traitements peut avoir des effets. Certains tests sont faux si tu ne te prépares pas.</p>
+  <ul class="check">
+    <li>☐ <b>Dès que tu as le devis :</b> réserve le vol, puis les rendez-vous (labo J2, dermato J4, gastro J5).</li>
+    <li>☐ <b>4 semaines avant :</b> demande au médecin s'il faut arrêter les probiotiques, l'huile d'origan et les antifongiques. Ils faussent le test SIBO et les selles. Pas d'antibiotiques si possible.</li>
+    <li>☐ <b>Jusqu'aux tests :</b> continue à manger du gluten (sinon la sérologie cœliaque est fausse).</li>
+    <li>☐ <b>3 jours avant :</b> arrête la biotine (souvent dans les complexes B), elle fausse la thyroïde et les hormones. Pas d'alcool, pas de sport intense (foie, muscles).</li>
+    <li>☐ <b>La veille :</b> dîner simple (viande ou poisson, riz blanc), puis 12 h de jeûne, eau seulement. Pas de chewing-gum ni de tabac.</li>
+    <li>☐ <b>Le matin :</b> aucun complément avant la prise de sang (zinc, vitamines…).</li>
+    <li>☐ <b>À emporter :</b> passeport, carte bancaire sans frais à l'étranger, liste de tes compléments et doses, photos de tes symptômes (plaques, cuir chevelu), anciens résultats.</li>
+    <li>☐ <b>À demander sur place :</b> tous les résultats en anglais avec les valeurs de référence, en PDF.</li>
+  </ul>
+</section>
+
+<section id="devis">
+  <h2>Demander un devis</h2>
+  <p>Copie cet e-mail (en anglais, la langue des services internationaux), ajoute ton nom et envoie-le à 2 ou 3 établissements. La liste des tests vient de tes cases cochées.</p>
+  <textarea id="mail" readonly></textarea>
+  <p><button type="button" id="copier">Copier l'e-mail</button> <span class="note" id="copie"></span></p>
+  <h3>Contacts (sites officiels, vérifiés en octobre 2026)</h3>
+  <div class="contacts">
+    <div><b>Acıbadem International</b><br>WhatsApp 24/7 : <a href="https://wa.me/905369048262" target="_blank" rel="noopener">+90 536 904 82 62</a><br>Tél. : +90 535 876 04 89<br><a href="https://acibademinternational.com/fr/" target="_blank" rel="noopener">Site en français</a> · <a href="https://acibademinternational.com/contact/" target="_blank" rel="noopener">formulaire</a></div>
+    <div><b>Memorial (International Patient Center)</b><br>Tél. : +90 549 639 3366 <span class="note">(à confirmer)</span><br><a href="https://www.memorial.com.tr/en/contact" target="_blank" rel="noopener">page contact</a></div>
+    <div><b>Koç Healthcare (Koç University Hospital, American Hospital)</b><br>American Hospital : <a href="mailto:international@vkfah.org">international@vkfah.org</a> · +90 212 311 2020<br><a href="https://www.kochealthcare.org/en/page/our-services-1" target="_blank" rel="noopener">programme international</a></div>
+    <div><b>Düzen Laboratuvarlar</b><br>International : <a href="mailto:yurtdisi@duzen.com.tr">yurtdisi@duzen.com.tr</a><br>Général : <a href="mailto:info@duzen.com.tr">info@duzen.com.tr</a> · 0 800 314 73 93</div>
+    <div><b>Synevo Türkiye</b><br>Tél. : 0850 420 20 20<br><a href="https://synevo.com.tr/tr/Ince-Bagirsakta-Asiri-Bakteri-Uremesi-(SIBO)-549" target="_blank" rel="noopener">test SIBO et réservation</a></div>
+    <div><b>Acıbadem Labmed</b><br><a href="https://www.acibademlabmed.com.tr/en/Accreditation-Certifications" target="_blank" rel="noopener">accréditations et liste des tests</a></div>
+  </div>
+  <p class="note">Les numéros commençant par 0 800, 0850 ou 444 ne marchent souvent que depuis la Turquie : depuis la France, passe par WhatsApp ou l'e-mail.</p>
+</section>
+
+<section id="certifs">
+  <h2>Quelles certifications exiger ?</h2>
+  <p>Il n'existe pas de label européen unique pour les cliniques. Ce qui compte vraiment :</p>
+  <ul>
+    <li><b>Pour le labo : ISO 15189.</b> C'est la norme internationale des labos médicaux, la même que celle exigée en France (via le COFRAC). Demande-la <b>pour tes tests</b>, car l'accréditation porte sur une liste précise d'analyses. Les accréditations turques (TURKAK) sont reconnues dans les pays signataires de l'ILAC, dont la France.</li>
+    <li><b>Pour l'hôpital : JCI</b>, le standard international de qualité et de sécurité des patients.</li>
+    <li><b>En bonus : CAP</b>, l'accréditation américaine des labos, la plus exigeante (Acıbadem Labmed l'a pour la génétique).</li>
+    <li>Des <b>résultats en anglais avec les valeurs de référence et les unités</b>, pour qu'un médecin en France puisse les relire.</li>
+  </ul>
+</section>
+
+<section id="sources">
+  <h2>Sources</h2>
+  <ul class="sources">
+    <li><a href="https://rankings.newsweek.com/worlds-best-hospitals-2026/turkey">Newsweek – World's Best Hospitals 2026, Turquie</a></li>
+    <li><a href="https://www.turkiyetoday.com/lifestyle/koc-university-hospital-ranks-1st-in-turkiye-in-2026-global-hospital-list-3215673">Türkiye Today – Koç n°1</a></li>
+    <li><a href="https://tbmag.co.uk/turkey-best-hospitals-world-ranking-newsweek-2026-health-tourism-analysis/">TB Mag – classement turc 2026</a></li>
+    <li><a href="https://www.lifelineturkey.com/blog/best-hospitals-in-turkey/">Lifeline Turkey – hôpitaux et JCI</a></li>
+    <li><a href="https://www.acibademlabmed.com.tr/en/Accreditation-Certifications">Acıbadem Labmed – accréditations</a></li>
+    <li><a href="https://acibademinternational.com/checkup-package/gold-mens-check-up-program/">Acıbadem – Gold Men's Check-Up</a></li>
+    <li><a href="https://acibademinternational.com/contact-us/">Acıbadem International – contact</a></li>
+    <li><a href="https://checkup.memorialhospital.info/en/check-up">Memorial – offre check-up</a></li>
+    <li><a href="https://memorialhospitalsgroup.com/internationalpatientcenter">Memorial – International Patient Center</a></li>
+    <li><a href="https://kochealthcare.org/ipp">Koç Healthcare – programme international</a></li>
+    <li><a href="https://www.amerikanhastanesi.org/plan-your-visit/international-visitors">American Hospital – patients internationaux</a></li>
+    <li><a href="https://drterziler.com/are-longevity-clinics-worth-it/">Dr. Terziler – prix des cliniques longévité</a></li>
+    <li><a href="https://duzen.com.tr/en/our-service-areas/200/international-services">Düzen – services internationaux</a></li>
+    <li><a href="https://synevo.com.tr/en/Synevo-in-Turkey">Synevo en Turquie</a></li>
+    <li><a href="https://synevo.com.tr/tr/Ince-Bagirsakta-Asiri-Bakteri-Uremesi-(SIBO)-549">Synevo – test SIBO</a></li>
+    <li><a href="https://www.galenlab.com.tr/check-up/">Galen Laboratuvar – check-up 2026</a></li>
+    <li><a href="https://www.labistanbul.net/check-up/">Labistanbul – check-up 2026</a></li>
+    <li><a href="https://www.buradabilgi.com.tr/2026-ozel-hastane-check-up-paketleri-ve-fiyatlari-kapsamli-rehber/">BuradaBilgi – prix check-up 2026</a></li>
+    <li><a href="https://turkeyluxuryclinics.com/en/blog/health-check-up-package-in-turkey">Turkey Luxury Clinics – forfaits</a></li>
+    <li><a href="https://investropa.com/blogs/news/istanbul-expat-guide">Guide expatrié Istanbul – consultations</a></li>
+    <li><a href="https://exchangerate.guru/eur/try/9/">Taux EUR/TRY</a></li>
+  </ul>
+  <p class="note">Ce site rassemble des informations publiques ; ce n'est pas un avis médical. Les décisions sur les tests et les traitements reviennent au médecin.</p>
+</section>
+</main>
+
+<script>
+// [nom affiché, nom anglais pour le devis, niveau, précision]  niveau : b = base, p = utile, o = option
+const GROUPES = [
+  ["Hématologie (NFS complète)", [
+    ["Hématies", "Red blood cells", "b"], ["Hémoglobine", "Hemoglobin", "b"], ["Hématocrite", "Hematocrit", "b"],
+    ["VGM", "MCV", "b"], ["TCMH", "MCH", "b"], ["CCMH", "MCHC", "b"], ["IDR (RDW)", "RDW", "b"],
+    ["Leucocytes", "White blood cells", "b"], ["Neutrophiles", "Neutrophils", "b"], ["Lymphocytes", "Lymphocytes", "b"],
+    ["Monocytes", "Monocytes", "b"], ["Éosinophiles", "Eosinophils", "b", "souvent élevés en cas d'allergie ou de parasites"],
+    ["Basophiles", "Basophils", "b"], ["Plaquettes", "Platelets", "b"], ["VMP", "MPV", "b"],
+    ["Réticulocytes", "Reticulocytes", "p"], ["Vitesse de sédimentation", "ESR", "b"]]],
+  ["Glycémie et métabolisme", [
+    ["Glycémie à jeun", "Fasting glucose", "b"], ["Insuline à jeun (HOMA-IR)", "Fasting insulin (HOMA-IR)", "b"],
+    ["HbA1c", "HbA1c", "b"], ["Peptide C", "C-peptide", "p"]]],
+  ["Foie", [
+    ["ASAT", "AST", "b"], ["ALAT", "ALT", "b"], ["GGT", "GGT", "b"], ["Phosphatases alcalines", "ALP", "b"],
+    ["Bilirubine totale", "Total bilirubin", "b"], ["Bilirubine directe", "Direct bilirubin", "b"],
+    ["Albumine", "Albumin", "b"], ["Protéines totales", "Total protein", "b"], ["LDH", "LDH", "p"]]],
+  ["Reins et électrolytes", [
+    ["Créatinine + DFG", "Creatinine + eGFR", "b"], ["Urée", "Urea / BUN", "b"], ["Acide urique", "Uric acid", "b"],
+    ["Sodium", "Sodium", "b"], ["Potassium", "Potassium", "b"], ["Chlore", "Chloride", "b"], ["Calcium", "Calcium", "b"],
+    ["Phosphore", "Phosphorus", "b"], ["Magnésium sérique", "Serum magnesium", "b"], ["Cystatine C", "Cystatin C", "p"],
+    ["Bicarbonates", "Bicarbonate", "p"]]],
+  ["Lipides et cœur", [
+    ["Cholestérol total", "Total cholesterol", "b"], ["HDL", "HDL", "b"], ["LDL (direct)", "LDL (direct)", "b"],
+    ["Triglycérides", "Triglycerides", "b"], ["ApoA1", "ApoA1", "p"], ["ApoB", "ApoB", "b"],
+    ["Lp(a)", "Lipoprotein(a)", "b", "une seule fois dans la vie"], ["CRP ultrasensible", "hs-CRP", "b"],
+    ["Homocystéine", "Homocysteine", "b"], ["Fibrinogène", "Fibrinogen", "p"]]],
+  ["Fer", [
+    ["Fer sérique", "Serum iron", "b"], ["Ferritine", "Ferritin", "b"], ["Transferrine", "Transferrin", "b"],
+    ["Saturation de la transferrine", "Transferrin saturation", "b"], ["Capacité totale de fixation", "TIBC", "b"]]],
+  ["Vitamines", [
+    ["Vitamine D (25-OH)", "Vitamin D (25-OH)", "b"], ["Vitamine B12", "Vitamin B12", "b"],
+    ["B12 active (holotranscobalamine)", "Active B12 (holotranscobalamin)", "p"], ["Folates sériques (B9)", "Serum folate", "b"],
+    ["Folates érythrocytaires", "RBC folate", "p"], ["Vitamine B1", "Vitamin B1 (thiamine)", "p"],
+    ["Vitamine B6 (PLP)", "Vitamin B6 (PLP)", "p"], ["Vitamine A (rétinol)", "Vitamin A (retinol)", "b", "à surveiller si tu en prends en complément"],
+    ["Vitamine E", "Vitamin E", "p"]]],
+  ["Minéraux et oligo-éléments", [
+    ["Zinc", "Zinc", "b"], ["Cuivre", "Copper", "b"], ["Céruloplasmine", "Ceruloplasmin", "b"], ["Sélénium", "Selenium", "b"],
+    ["Magnésium érythrocytaire", "RBC magnesium", "p", "plus fiable que dans le sérum"], ["Iode urinaire", "Urinary iodine", "p"],
+    ["Oméga-3 index", "Omega-3 index", "o", "souvent envoyé à l'étranger"]]],
+  ["Thyroïde", [
+    ["TSH", "TSH", "b"], ["T4 libre", "Free T4", "b"], ["T3 libre", "Free T3", "b"], ["Anticorps anti-TPO", "Anti-TPO antibodies", "b"],
+    ["Anticorps anti-thyroglobuline", "Anti-thyroglobulin antibodies", "b"], ["T3 reverse", "Reverse T3", "o"]]],
+  ["Hormones (prise de sang entre 7 h et 10 h)", [
+    ["Testostérone totale", "Total testosterone", "b"], ["Testostérone libre", "Free testosterone", "b"],
+    ["Testostérone biodisponible", "Bioavailable testosterone", "p"], ["SHBG", "SHBG", "b"], ["DHT", "DHT", "b"],
+    ["LH", "LH", "b"], ["FSH", "FSH", "b"], ["Prolactine", "Prolactin", "b"], ["Œstradiol (sensible)", "Estradiol (sensitive)", "b"],
+    ["DHEA-S", "DHEA-S", "b"], ["Androstènedione", "Androstenedione", "p"], ["Cortisol 8 h", "Morning cortisol (8am)", "b"],
+    ["ACTH", "ACTH", "p"], ["IGF-1", "IGF-1", "b"], ["PTH", "PTH", "p"]]],
+  ["Immunité et inflammation", [
+    ["Électrophorèse des protéines", "Serum protein electrophoresis", "p"], ["IgA totales", "Total IgA", "b", "nécessaire pour lire le test cœliaque"],
+    ["IgG totales", "Total IgG", "p"], ["IgM totales", "Total IgM", "p"], ["IgE totales", "Total IgE", "b"],
+    ["Tryptase", "Serum tryptase", "b", "point de départ pour le MCAS"], ["Anticorps antinucléaires", "ANA", "p"],
+    ["Facteur rhumatoïde", "Rheumatoid factor", "o"], ["Complément C3", "Complement C3", "o"], ["Complément C4", "Complement C4", "o"]]],
+  ["Maladie cœliaque", [
+    ["Anti-transglutaminase IgA", "Anti-tTG IgA", "b", "il faut manger du gluten avant"],
+    ["Anti-gliadine déamidée IgG", "Deamidated gliadin IgG", "p"]]],
+  ["Allergies (IgE spécifiques ou prick-tests)", [
+    ["Lait de vache", "Cow's milk", "p"], ["Œuf", "Egg", "p"], ["Blé", "Wheat", "p"], ["Soja", "Soy", "p"], ["Arachide", "Peanut", "p"],
+    ["Fruits à coque (mélange)", "Tree nut mix", "p"], ["Poisson", "Fish", "p"], ["Crustacés", "Shellfish", "p"],
+    ["Sarrasin", "Buckwheat", "p"], ["Tomate", "Tomato", "p"], ["Sésame", "Sesame", "p"], ["Céleri", "Celery", "p"],
+    ["Moutarde", "Mustard", "o"], ["Agrumes", "Citrus", "o"], ["Banane", "Banana", "o"], ["Kiwi", "Kiwi", "o"],
+    ["Pomme", "Apple", "o"], ["Riz", "Rice", "o"], ["Maïs", "Corn", "o"], ["Viande de bœuf", "Beef", "o"],
+    ["Acariens", "House dust mites", "p"], ["Moisissures (Alternaria, Aspergillus)", "Molds (Alternaria, Aspergillus)", "p"],
+    ["Chat", "Cat", "p"], ["Chien", "Dog", "p"], ["Pollens de graminées", "Grass pollen", "p"], ["Pollens d'arbres", "Tree pollen", "p"],
+    ["Ambroisie / armoise", "Ragweed / mugwort", "o"], ["Blatte", "Cockroach", "o"], ["Latex", "Latex", "o"], ["Malassezia", "Malassezia", "p", "levure de la peau"]]],
+  ["Infections (sérologies)", [
+    ["VIH", "HIV", "b"], ["Hépatite B (AgHBs)", "Hepatitis B (HBsAg)", "b"], ["Hépatite B (anti-HBs)", "Hepatitis B (anti-HBs)", "b"],
+    ["Hépatite B (anti-HBc)", "Hepatitis B (anti-HBc)", "b"], ["Hépatite C", "Hepatitis C (anti-HCV)", "b"],
+    ["Syphilis", "Syphilis", "p"], ["Helicobacter pylori (test respiratoire ou antigène dans les selles)", "H. pylori (urea breath test or stool antigen)", "b"]]],
+  ["Urines", [
+    ["Densité", "Specific gravity", "b"], ["pH", "pH", "b"], ["Protéines", "Protein", "b"], ["Glucose", "Glucose", "b"],
+    ["Cétones", "Ketones", "b"], ["Sang", "Blood", "b"], ["Leucocytes", "Leukocytes", "b"], ["Nitrites", "Nitrites", "b"],
+    ["Bilirubine", "Bilirubin", "b"], ["Urobilinogène", "Urobilinogen", "b"], ["Sédiment urinaire", "Urine sediment microscopy", "b"],
+    ["Albumine/créatinine urinaire", "Urine albumin/creatinine ratio", "p"]]],
+  ["Selles", [
+    ["Calprotectine fécale", "Fecal calprotectin", "b", "inflammation de l'intestin"], ["Élastase fécale", "Fecal elastase", "b", "digestion pancréatique"],
+    ["Sang occulte (immunologique)", "Fecal immunochemical test (FIT)", "b"],
+    ["PCR pathogènes digestifs (bactéries, virus, parasites)", "GI pathogen PCR panel", "p"],
+    ["Parasitologie au microscope", "Ova and parasites microscopy", "b"], ["Antigènes Giardia / Cryptosporidium", "Giardia / Cryptosporidium antigens", "p"],
+    ["Sécrétoire IgA fécale", "Fecal secretory IgA", "o"]]],
+  ["Tests respiratoires", [
+    ["SIBO : hydrogène", "SIBO breath test: hydrogen", "b"], ["SIBO : méthane", "SIBO breath test: methane", "b"],
+    ["SIBO : sulfure d'hydrogène (H₂S)", "SIBO breath test: hydrogen sulfide", "o", "rare en Turquie (Biolab, Izmir)"],
+    ["Intolérance au lactose", "Lactose breath test", "p"], ["Intolérance au fructose", "Fructose breath test", "p"]]],
+  ["Peau et cheveux (consultation dermato)", [
+    ["Prélèvement mycologique des plaques (mains)", "Mycological sample (KOH + culture) of hand lesions", "b", "pour distinguer mycose et eczéma"],
+    ["Prélèvement du cuir chevelu (Malassezia, teigne)", "Scalp mycological sample (Malassezia, tinea)", "b"],
+    ["Trichoscopie", "Trichoscopy", "b"]]],
+  ["Mastocytose / MCAS (urines de 24 h)", [
+    ["N-méthylhistamine urinaire", "Urinary N-methylhistamine", "o"], ["11β-prostaglandine F2α urinaire", "Urinary 11β-PGF2α", "o"],
+    ["Leucotriène E4 urinaire", "Urinary LTE4", "o"]]],
+];
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const NIV = { b: ["base", "ok"], p: ["utile", "plus"], o: ["option", "warn"] };
+let saved = null;
+try { saved = JSON.parse(localStorage.getItem("ct_coches") || "null") } catch {}
+
+$("groupes").innerHTML = GROUPES.map(([titre, items], g) => `
+  <div class="groupe"><h3>${esc(titre)} <small>${items.length}</small></h3>
+  ${items.map(([fr, en, n, d], i) => {
+    const id = `${g}-${i}`, on = saved ? saved.includes(id) : n !== "o";
+    return `<label><input type="checkbox" data-id="${id}" data-niv="${n}" ${on ? "checked" : ""}>
+      <span>${esc(fr)} <span class="tag ${NIV[n][1]}">${NIV[n][0]}</span>${d ? `<br><span class="d">${esc(d)}</span>` : ""}</span></label>`;
+  }).join("")}</div>`).join("");
+
+const cases = () => [...document.querySelectorAll("#groupes input")];
+
+function maj() {
+  const on = cases().filter(c => c.checked);
+  $("total").textContent = `${on.length} marqueurs cochés sur ${cases().length}`;
+  try { localStorage.setItem("ct_coches", JSON.stringify(on.map(c => c.dataset.id))) } catch {}
+  const blocs = GROUPES.map(([titre, items], g) => {
+    const sel = items.filter((_, i) => document.querySelector(`[data-id="${g}-${i}"]`).checked).map(x => x[1]);
+    return sel.length ? `- ${titre.replace(/ \(.*\)$/, "")} : ${sel.join(", ")}` : "";
+  }).filter(Boolean);
+  $("mail").value =
+`Subject: Quote request – comprehensive check-up and extended lab panel, February 2027
+
+Hello,
+
+I am a [age]-year-old [man/woman] living in France and I plan to come to Istanbul for about two weeks in February 2027 (around 3–17 February).
+
+I would like a quote, at your self-pay price (no insurance), for:
+
+1. An extended laboratory panel (${on.length} markers, list below), ideally in one blood draw on a fasting morning, plus urine and stool tests.
+2. A check-up physician visit, abdominal and thyroid ultrasound, and an ECG.
+3. Consultations with a gastroenterologist and a dermatologist (with mycological sampling and trichoscopy), and a final review of all results.
+4. If possible, a lactulose SIBO breath test (hydrogen and methane).
+
+Requested tests:
+${blocs.join("\n")}
+
+Could you please tell me:
+- the itemised price for each test and consultation, and any package price;
+- which tests are done in your own ISO 15189 accredited laboratory and which are sent out, with turnaround times;
+- whether results are provided in English with reference ranges, as PDF;
+- the preparation instructions and how far in advance I should book.
+
+Thank you very much,
+[Your name]
+[Phone / WhatsApp]`;
+}
+$("groupes").addEventListener("change", maj);
+$("tout").onclick = () => { cases().forEach(c => c.checked = true); maj() };
+$("base").onclick = () => { cases().forEach(c => c.checked = c.dataset.niv === "b"); maj() };
+$("copier").onclick = async () => {
+  try { await navigator.clipboard.writeText($("mail").value); $("copie").textContent = "Copié ✔" }
+  catch { $("mail").select(); $("copie").textContent = "Sélectionné : fais Ctrl+C" }
+};
+maj();
+</script>
+</body>
+</html>
